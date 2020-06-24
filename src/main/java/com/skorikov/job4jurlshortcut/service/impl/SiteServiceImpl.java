@@ -6,6 +6,7 @@ import com.skorikov.job4jurlshortcut.repository.SiteRepository;
 import com.skorikov.job4jurlshortcut.service.SiteService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,9 @@ public class SiteServiceImpl implements SiteService {
         if (registerSite == null) {
             registerSite = site;
             registerSite.setStatus(Status.ACTIVE);
-            registerSite.setPassword(RandomStringUtils.randomAlphanumeric(8));
+            String password = RandomStringUtils.randomAlphanumeric(8);
+            String encodedPassword = new BCryptPasswordEncoder().encode(password);
+            registerSite.setPassword(encodedPassword);
             siteRepository.save(registerSite);
         } else {
             registerSite = new Site();

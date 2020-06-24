@@ -1,8 +1,12 @@
 package com.skorikov.job4jurlshortcut.model;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Table(name = "sites")
@@ -17,6 +21,12 @@ public class Site extends BaseEntity {
      */
     @Column(name = "password")
     private String password;
+
+    /**
+     * Site links.
+     */
+    @OneToMany(mappedBy = "site", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Link> links;
 
     /**
      * Default constructor.
@@ -38,6 +48,14 @@ public class Site extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 
     @Override

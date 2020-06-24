@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SiteRepository extends JpaRepository<Site, Long> {
     Site findBySite(String site);
+
     Site findBySiteAndPassword(String site, String password);
+
     Site findSiteBySiteAndPassword(String site, String password);
 }

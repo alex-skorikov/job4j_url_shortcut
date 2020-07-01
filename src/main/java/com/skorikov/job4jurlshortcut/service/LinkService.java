@@ -1,7 +1,6 @@
 package com.skorikov.job4jurlshortcut.service;
 
 import com.skorikov.job4jurlshortcut.model.Link;
-import com.skorikov.job4jurlshortcut.model.Site;
 
 import java.util.List;
 

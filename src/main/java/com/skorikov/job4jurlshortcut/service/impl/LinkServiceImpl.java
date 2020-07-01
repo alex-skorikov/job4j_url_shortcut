@@ -39,6 +39,7 @@ public class LinkServiceImpl implements LinkService {
             newLink.setLink(link);
             newLink.setLinkCode(code);
             newLink.setSite(site);
+            newLink.setStatus(Status.ACTIVE);
             newLink.setVizitCount(1);
         } else {
             Integer vizitCount = newLink.getVizitCount();

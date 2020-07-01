@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -26,6 +27,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class RegistrationControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private RegistrationController registrationController;
+
+    @Test
+    void registrationControllerIsNotNull() {
+        assertThat(registrationController).isNotNull();
+    }
 
     @Test
     void testRegistrationNewSite() throws Exception {

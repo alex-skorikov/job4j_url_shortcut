@@ -48,6 +48,7 @@ public class AuthorizationController {
             Site site = siteService.findBySiteUrlAndPassword(login, password);
 
             if (site == null) {
+                //TODO add logger.
                 throw new UsernameNotFoundException("User with username: " + site + " not found");
             }
 
@@ -59,6 +60,7 @@ public class AuthorizationController {
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
+            //TODO add logger.
             throw new BadCredentialsException("Invalid username or password");
         }
     }

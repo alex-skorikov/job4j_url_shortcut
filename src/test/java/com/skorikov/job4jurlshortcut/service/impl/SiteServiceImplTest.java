@@ -2,7 +2,6 @@ package com.skorikov.job4jurlshortcut.service.impl;
 
 import com.skorikov.job4jurlshortcut.model.Site;
 import com.skorikov.job4jurlshortcut.model.Status;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @RunWith(SpringRunner.class)
@@ -32,27 +35,27 @@ class SiteServiceImplTest {
         Site site = new Site();
         site.setSite("new test site");
         Site returnSite = this.siteService.registration(site);
-        Assert.assertNotNull(returnSite);
-        Assert.assertThat(returnSite.getSite(), is("new test site"));
-        Assert.assertNotNull(returnSite.getPassword());
-        Assert.assertNotNull(returnSite.getCreated());
-        Assert.assertNotNull(returnSite.getUpdate());
-        Assert.assertThat(returnSite.getStatus(), is(Status.ACTIVE));
+        assertNotNull(returnSite);
+        assertTrue(returnSite.getSite().equals("new test site"));
+        assertNotNull(returnSite.getPassword());
+        assertNotNull(returnSite.getCreated());
+        assertNotNull(returnSite.getUpdate());
+        assertEquals(returnSite.getStatus(), Status.ACTIVE);
     }
 
     @Test
     void whenGetAllSitesThenReturnList() {
         List<Site> list = this.siteService.getAll();
-        Assert.assertThat(list.size(), is(2));
+        assertNotEquals(list.size(), is(2));
     }
 
     @Test
     void whenFindBySiteUrlthenReturnSite() {
         Site site = this.siteService.findBySiteUrl("site_1");
-        Assert.assertNotNull(site);
-        Assert.assertThat(site.getPassword(),
-                is("$2a$08$fNUHI3FnO3cbT6VAcClJOOsIq93f2101ud2RAKiZFAh7Y2h.oFRzC"));
-        Assert.assertThat(site.getStatus(), is(Status.ACTIVE));
+        assertNotNull(site);
+        assertEquals(site.getPassword(),
+                "$2a$08$fNUHI3FnO3cbT6VAcClJOOsIq93f2101ud2RAKiZFAh7Y2h.oFRzC");
+        assertEquals(site.getStatus(), Status.ACTIVE);
     }
 
     @Test
@@ -60,25 +63,25 @@ class SiteServiceImplTest {
         Site site = this.siteService
                 .findBySiteUrlAndPassword("site_2",
                         "$2a$08$fNUHI3FnO3cbT6VAcClJOOsIq93f2101ud2RAKiZFAh7Y2h.oFRzC");
-        Assert.assertNotNull(site);
+        assertNotNull(site);
     }
 
     @Test
     void whenFindByIdThenReturnSite() {
         Site site = this.siteService.findById(11L);
-        Assert.assertNotNull(site);
-        Assert.assertThat(site.getSite(), is("site_1"));
+        assertNotNull(site);
+        assertEquals(site.getSite(), "site_1");
     }
 
     @Test
     void whenDeleteSiteThenChangeSiteStaus() {
         Site site = this.siteService.findById(11L);
-        Assert.assertNotNull(site);
-        Assert.assertThat(site.getStatus(), is(Status.ACTIVE));
+        assertNotNull(site);
+        assertEquals(site.getStatus(), Status.ACTIVE);
 
         this.siteService.delete(11L);
 
         Site testSite = this.siteService.findById(11L);
-        Assert.assertThat(testSite.getStatus(), is(Status.DELETE));
+        assertEquals(testSite.getStatus(), Status.DELETE);
     }
 }

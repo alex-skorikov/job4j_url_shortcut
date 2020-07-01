@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/alex-skorikov/Unit/branch/master/graph/badge.svg)](https://codecov.io/gh/alex-skorikov/job4j_url_shortcut)
+[![codecov](https://codecov.io/gh/alex-skorikov/job4j_url_shortcut/branch/master/graph/badge.svg)](https://codecov.io/gh/alex-skorikov/job4j_url_shortcut)
 
 
 

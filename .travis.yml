@@ -1,9 +1,20 @@
 language: java
+
+sudo: false
+
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+jdk:
+- openjdk8
+script: "mvn cobertura:cobertura"
 
-
+notifications:
+  email:
+    recipients:
+    - the.na4ig@gmail.com
+    on_success: never
+    on_failure: always
 env:
   global:
-  - CODECOV_TOKEN=:29a59c6b-0641-4169-976c-9b737a935ff9
+  - CODECOV_TOKEN="29a59c6b-0641-4169-976c-9b737a935ff9"
 

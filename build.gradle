@@ -13,13 +13,14 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-test'
 	implementation 'io.jsonwebtoken:jjwt:0.2'
-	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.14'
+	compile 'org.postgresql:postgresql:42.2.12'
 	compile 'org.json:json:20171018'
 	compile 'javax.xml.bind:jaxb-api'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
@@ -33,11 +34,6 @@ dependencies {
 test {
 	useJUnitPlatform()
 	finalizedBy jacocoTestReport
-}
-
-tasks.withType(Test){
-    scanForTestClasses = false
-    include "**/*Test.class"
 }
 
 jacocoTestReport {

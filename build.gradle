@@ -35,6 +35,11 @@ test {
 	finalizedBy jacocoTestReport
 }
 
+tasks.withType(Test){
+    scanForTestClasses = false
+    include "**/*Test.class"
+}
+
 jacocoTestReport {
 	reports {
 		xml.enabled false

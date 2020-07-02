@@ -19,7 +19,6 @@ cache:
 install: true
 
 script:
-- ./gradlew build
 - echo "skipping tests"
 
 notifications:

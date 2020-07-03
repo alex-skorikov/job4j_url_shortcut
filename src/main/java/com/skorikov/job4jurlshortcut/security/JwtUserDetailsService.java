@@ -11,14 +11,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Jwt user detail service for get userdetails.
+ */
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
     /**
-     * Site srvice.
+     * Site service.
      */
     private final SiteService siteService;
 
+    /**
+     * Constructor.
+     * @param siteService site service.
+     */
     @Autowired
     public JwtUserDetailsService(SiteService siteService) {
         this.siteService = siteService;

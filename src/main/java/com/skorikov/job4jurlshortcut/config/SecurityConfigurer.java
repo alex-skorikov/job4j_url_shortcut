@@ -10,7 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-
+/**
+ * Security configurer.
+ */
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     /**
@@ -18,6 +20,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
      */
     private final JwtTokenProvider jwtTokenProvider;
 
+    /**
+     * Security cinfigerer by Jwt.
+     * @param jwtTokenProvider jwt tokenprovaider.
+     */
     @Autowired
     public SecurityConfigurer(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;

@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Statistics controller.
+ */
 @RestController
 public class StatisticController {
     /**
@@ -30,12 +33,26 @@ public class StatisticController {
      */
     private final SiteService siteService;
 
+    /**
+     * Constructor.
+     *
+     * @param linkService link servise.
+     * @param siteService siteservise.
+     */
     @Autowired
     public StatisticController(LinkService linkService, SiteService siteService) {
         this.linkService = linkService;
         this.siteService = siteService;
     }
 
+    /**
+     * Get redirect link.
+     *
+     * @param code unique link code.
+     * @return url.
+     * <p>
+     * Получает уникальный код ссылки и возвращает ее.
+     */
     @GetMapping
     @RequestMapping("/redirect/")
     public ResponseEntity<String> redirect(@RequestParam String code) {
@@ -47,6 +64,14 @@ public class StatisticController {
                 .body("");
     }
 
+    /**
+     * Get statistics.
+     *
+     * @param authentication user(site) auth.
+     * @return links list.
+     * <p>
+     * Отдает все ссылки которые привязаны к текущеу авторизованному пользователю(site).
+     */
     @GetMapping
     @RequestMapping("/statistic")
     public ResponseEntity<String> statistic(Authentication authentication) {

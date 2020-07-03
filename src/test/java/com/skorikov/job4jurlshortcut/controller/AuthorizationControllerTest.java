@@ -16,26 +16,41 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+/**
+ * Tests Auth controller.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @AutoConfigureMockMvc
-@TestPropertySource("/application.properties")
+@TestPropertySource("/application.test.properties")
 @Sql(value = {"/create_site_before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create_site_after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class AuthorizationControllerTest {
-
+    /**
+     * Mvc mock.
+     */
     @Autowired
     private MockMvc mockMvc;
-
+    /**
+     * Auth controller.
+     */
     @Autowired
     private AuthorizationController authorizationController;
 
+    /**
+     * Controller in not null.
+     */
     @Test
     void loginIsNotNull() {
         assertThat(authorizationController).isNotNull();
     }
 
+    /**
+     * Authorization.
+     *
+     * @throws Exception exception.
+     */
     @Test
     void testAuthorization() throws Exception {
         this.mockMvc.perform(post("/login").contentType(MediaType.APPLICATION_JSON)

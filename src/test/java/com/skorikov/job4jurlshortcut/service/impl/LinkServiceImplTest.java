@@ -15,30 +15,41 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Link service impl tests.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
-@TestPropertySource("/application.properties")
+@TestPropertySource("/application.test.properties")
 @Sql(value = {"/create_site_before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create_site_after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class LinkServiceImplTest {
-
+    /**
+     * Link service.
+     */
     @Autowired
     private LinkServiceImpl linkService;
 
+    /**
+     * Join link and site.
+     */
     @Test
     void whenJoinLinkToSiteThenReturnLink() {
         Link link = this.linkService.joinLinkToSite("site_1", "new link to site");
 
         assertNotNull(link);
         assertEquals(link.getLink(), "new link to site");
-        assertEquals(link.getVizitCount(),1);
+        assertEquals(link.getVizitCount(), 1);
 
         link = this.linkService.joinLinkToSite("site_1", "new link to site");
 
         assertEquals(link.getVizitCount(), 2);
     }
 
+    /**
+     * Get all links.
+     */
     @Test
     void whenGetAllLinksThenReturnList() {
         List<Link> links = this.linkService.getAll();
@@ -47,6 +58,9 @@ class LinkServiceImplTest {
 
     }
 
+    /**
+     * Find link by link url.
+     */
     @Test
     void whenFindLinkByLinkThenReturnLink() {
         Link link = this.linkService.findByLink("link/2");
@@ -54,6 +68,9 @@ class LinkServiceImplTest {
         assertEquals(link.getLinkCode(), "X5vumU");
     }
 
+    /**
+     * Find link by code.
+     */
     @Test
     void whenFindLinkByLinkCodeThenReturnLink() {
         Link link = this.linkService.findByLinkCode("X5vumU");
@@ -61,6 +78,9 @@ class LinkServiceImplTest {
         assertEquals(link.getId(), 12L);
     }
 
+    /**
+     * Find link by id.
+     */
     @Test
     void whenFindLinkByIdThenReturnLink() {
         Link link1 = this.linkService.findById(11L);
@@ -68,6 +88,9 @@ class LinkServiceImplTest {
         assertEquals(link1.getLink(), "link/1");
     }
 
+    /**
+     * Delete link.
+     */
     @Test
     void whebDeleteLinkThenSetLinkStatusDelete() {
         this.linkService.delete(11L);

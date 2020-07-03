@@ -8,6 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+/**
+ * Site entity.
+ */
 @Entity
 @Table(name = "sites")
 public class Site extends BaseEntity {
@@ -34,26 +37,50 @@ public class Site extends BaseEntity {
     public Site() {
     }
 
+    /**
+     * Get site.
+     * @return site.
+     */
     public String getSite() {
         return site;
     }
 
+    /**
+     * Set site.
+     * @param site site.
+     */
     public void setSite(String site) {
         this.site = site;
     }
 
+    /**
+     * Get password.
+     * @return password.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Set password.
+     * @param password pass.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Get links list.
+     * @return list.
+     */
     public List<Link> getLinks() {
         return links;
     }
 
+    /**
+     * Set links list.
+     * @param links list.
+     */
     public void setLinks(List<Link> links) {
         this.links = links;
     }

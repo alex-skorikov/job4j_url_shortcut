@@ -20,27 +20,42 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
+/**
+ * Statistic controller test.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @AutoConfigureMockMvc
-@TestPropertySource("/application.properties")
+@TestPropertySource("/application.test.properties")
 @Sql(value = {"/create_site_before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create_site_after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @WithUserDetails(value = "site_1")
 class StatisticControllerTest {
-
+    /**
+     * Mock mvc.
+     */
     @Autowired
     private MockMvc mockMvc;
-
+    /**
+     * Controller.
+     */
     @Autowired
     private StatisticController statisticController;
 
+    /**
+     * Controller isnot null.
+     */
     @Test
     void controllerIsNotNull() {
         assertThat(statisticController).isNotNull();
     }
 
+    /**
+     * Test get link from DB by code.
+     *
+     * @throws Exception exception.
+     */
     @Test
     void testRedirect() throws Exception {
         this.mockMvc.perform(get("/redirect/").contentType(MediaType.APPLICATION_JSON)
@@ -50,6 +65,11 @@ class StatisticControllerTest {
                 .andExpect(status().is(302));
     }
 
+    /**
+     * Get statistics from DB.
+     *
+     * @throws Exception exception.
+     */
     @Test
     void testGetStatistic() throws Exception {
         this.mockMvc.perform(post("/statistic").contentType(MediaType.APPLICATION_JSON))

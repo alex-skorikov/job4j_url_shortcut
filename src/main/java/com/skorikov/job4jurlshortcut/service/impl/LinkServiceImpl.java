@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Link service impl.
+ */
 @Service
 public class LinkServiceImpl implements LinkService {
     /**
@@ -23,6 +26,11 @@ public class LinkServiceImpl implements LinkService {
      */
     private final SiteRepository siteRepository;
 
+    /**
+     * Constructor.
+     * @param linkRepository link repository.
+     * @param siteRepository site repository.
+     */
     @Autowired
     public LinkServiceImpl(LinkRepository linkRepository, SiteRepository siteRepository) {
         this.linkRepository = linkRepository;

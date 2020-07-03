@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
 
+/**
+ * Token provider.
+ */
 @Component
 public class JwtTokenProvider {
     /**
@@ -38,17 +41,29 @@ public class JwtTokenProvider {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    /**
+     * Password encoder.
+     * @return password encoder.
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
 
+    /**
+     * Init post constructor.
+     */
     @PostConstruct
     protected void init() {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
+    /**
+     * Create token.
+     * @param username String user name.
+     * @return token.
+     */
     public String createToken(String username) {
 
         Claims claims = Jwts.claims().setSubject(username);
@@ -64,15 +79,30 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    /**
+     * Authentication by token.
+     * @param token token.
+     * @return Authentication.
+     */
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
+    /**
+     * Get user name.
+     * @param token token.
+     * @return user name.
+     */
     public String getUsername(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**
+     * Resolve by token.
+     * @param req http request.
+     * @return resolve dy token.
+     */
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer")) {
@@ -81,6 +111,11 @@ public class JwtTokenProvider {
         return null;
     }
 
+    /**
+     * Validate token.
+     * @param token token.
+     * @return valid or no.
+     */
     public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);

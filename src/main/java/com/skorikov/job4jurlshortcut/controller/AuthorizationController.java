@@ -10,9 +10,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +33,13 @@ public class AuthorizationController {
      */
     private final SiteService siteService;
 
+    /**
+     * Constructor.
+     *
+     * @param authenticationManager auth manager.
+     * @param jwtTokenProvider      jwtprovider.
+     * @param siteService           siteservice.
+     */
     @Autowired
     public AuthorizationController(AuthenticationManager authenticationManager,
                                    JwtTokenProvider jwtTokenProvider,
@@ -41,6 +48,13 @@ public class AuthorizationController {
         this.siteService = siteService;
     }
 
+    /**
+     * User authorization.
+     *
+     * @param login    site login.
+     * @param password site password.
+     * @return site url and token.
+     */
     @PostMapping
     public ResponseEntity login(@RequestHeader String login,
                                 @RequestHeader String password) {

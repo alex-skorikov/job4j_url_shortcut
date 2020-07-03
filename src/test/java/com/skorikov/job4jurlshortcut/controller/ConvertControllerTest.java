@@ -18,28 +18,41 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+/**
+ * Tests convert controller.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @AutoConfigureMockMvc
-@TestPropertySource("/application.properties")
+@TestPropertySource("/application.test.properties")
 @Sql(value = {"/create_site_before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create_site_after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @WithUserDetails(value = "site_1")
 class ConvertControllerTest {
-
+    /**
+     * Mock mvc.
+     */
     @Autowired
     private MockMvc mockMvc;
-
+    /**
+     * Controller.
+     */
     @Autowired
     private ConvertController convertController;
 
+    /**
+     * Test controller is not null.
+     */
     @Test
     void controllerIsNotNull() {
         assertThat(convertController).isNotNull();
     }
 
+    /**
+     * Convert controller test method POST.
+     * @throws Exception exception.
+     */
     @Test
     void testConvertControllerGetLinkCode() throws Exception {
         this.mockMvc.perform(post("/convert").contentType(MediaType.APPLICATION_JSON)

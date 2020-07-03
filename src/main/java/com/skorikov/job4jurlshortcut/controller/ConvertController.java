@@ -26,11 +26,25 @@ public class ConvertController {
      */
     private final LinkService linkService;
 
+    /**
+     * Constructor.
+     *
+     * @param linkService link servise.
+     */
     @Autowired
     public ConvertController(LinkService linkService) {
         this.linkService = linkService;
     }
 
+    /**
+     * Method Post("/convert").
+     *
+     * @param site           site url.
+     * @param authentication auth.
+     * @return code.
+     * Метод получает url ссылки, привязывает ее к сайту и возвращает
+     * уникальный код.
+     */
     @PostMapping
     public ResponseEntity<String> convert(@RequestBody Map<String, String> site, Authentication authentication) {
         String url = site.get("url");

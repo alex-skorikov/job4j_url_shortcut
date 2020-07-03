@@ -25,11 +25,24 @@ public class RegistrationController {
      */
     private final SiteService siteService;
 
+    /**
+     * Constructor.
+     * @param siteService site servise.
+     */
     @Autowired
     public RegistrationController(SiteService siteService) {
         this.siteService = siteService;
     }
 
+    /**
+     * Registration site.
+     *
+     * @param site url.
+     * @return login, password registration is valid.
+     * <p>
+     * Метод получает url сайта, если такой отсутствуетв базе - регистрирует и
+     * возвращает логин, пароль и bool true. Если сайт есть в ситстеме - возвращает false.
+     */
     @PostMapping
     public ResponseEntity<String> registration(@RequestBody Map<String, String> site) {
         Site newSite = new Site();

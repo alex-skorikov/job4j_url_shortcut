@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Site service impl.
+ */
 @Service
 public class SiteServiceImpl implements SiteService {
     /**
@@ -18,6 +21,10 @@ public class SiteServiceImpl implements SiteService {
      */
     private final SiteRepository siteRepository;
 
+    /**
+     * Constructor.
+     * @param siteRepository site repository.
+     */
     @Autowired
     public SiteServiceImpl(SiteRepository siteRepository) {
         this.siteRepository = siteRepository;

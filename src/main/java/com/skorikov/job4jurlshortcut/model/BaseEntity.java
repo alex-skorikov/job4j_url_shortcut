@@ -14,6 +14,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 import java.util.Date;
 
+/**
+ * Base entity.
+ * Базовая сущность.
+ */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
@@ -51,34 +55,74 @@ public class BaseEntity {
     public BaseEntity() {
     }
 
+    /**
+     * Get id.
+     *
+     * @return entity id.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Set id.
+     *
+     * @param id id.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Get date created.
+     *
+     * @return date.
+     */
     public Date getCreated() {
         return created;
     }
 
+    /**
+     * Set date created.
+     *
+     * @param created date.
+     */
     public void setCreated(Date created) {
         this.created = created;
     }
 
+    /**
+     * Get date update.
+     *
+     * @return date.
+     */
     public Date getUpdate() {
         return update;
     }
 
+    /**
+     * Set date update.
+     *
+     * @param update date.
+     */
     public void setUpdate(Date update) {
         this.update = update;
     }
 
+    /**
+     * Get status.
+     *
+     * @return entity status.
+     */
     public Status getStatus() {
         return status;
     }
 
+    /**
+     * Set status.
+     *
+     * @param status status.
+     */
     public void setStatus(Status status) {
         this.status = status;
     }

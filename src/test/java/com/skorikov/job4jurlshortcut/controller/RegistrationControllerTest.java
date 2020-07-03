@@ -17,25 +17,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Tests registration controller.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @AutoConfigureMockMvc
-@TestPropertySource("/application.properties")
+@TestPropertySource("/application.test.properties")
 @Sql(value = {"/create_site_before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create_site_after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class RegistrationControllerTest {
+    /**
+     * Mock mvc.
+     */
     @Autowired
     private MockMvc mockMvc;
-
+    /**
+     * Controller.
+     */
     @Autowired
     private RegistrationController registrationController;
 
+    /**
+     * Controller is not null.
+     */
     @Test
     void registrationControllerIsNotNull() {
         assertThat(registrationController).isNotNull();
     }
 
+    /**
+     * Test registration new site.
+     * @throws Exception exception.
+     */
     @Test
     void testRegistrationNewSite() throws Exception {
 
@@ -49,6 +64,10 @@ class RegistrationControllerTest {
 
     }
 
+    /**
+     * Test try registration dublicate dite.
+     * @throws Exception exception.
+     */
     @Test
     void testRegistrationDublicateSite() throws Exception {
         this.mockMvc.perform(post("/registration").contentType(MediaType.APPLICATION_JSON)

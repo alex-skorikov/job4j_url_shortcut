@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Jwt user.
+ */
 public class JwtUser implements UserDetails {
 
     /**
@@ -22,6 +25,12 @@ public class JwtUser implements UserDetails {
      */
     private final Collection<? extends GrantedAuthority> authorities;
 
+    /**
+     * Constructor.
+     * @param username name.
+     * @param password password.
+     * @param authorities authorities.
+     */
     public JwtUser(
             String username,
             String password,

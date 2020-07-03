@@ -18,18 +18,25 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * SiteService impl tests.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
-@TestPropertySource("/application.properties")
+@TestPropertySource("/application.test.properties")
 @Sql(value = {"/create_site_before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create_site_after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class SiteServiceImplTest {
-
+    /**
+     * Site service.
+     */
     @Autowired
     private SiteServiceImpl siteService;
 
+    /**
+     * Registration site.
+     */
     @Test
     void whenRegistrationNewSiteThenReturnSite() {
         Site site = new Site();
@@ -43,12 +50,18 @@ class SiteServiceImplTest {
         assertEquals(returnSite.getStatus(), Status.ACTIVE);
     }
 
+    /**
+     * Get all sites.
+     */
     @Test
     void whenGetAllSitesThenReturnList() {
         List<Site> list = this.siteService.getAll();
         assertNotEquals(list.size(), is(2));
     }
 
+    /**
+     * Find site by url.
+     */
     @Test
     void whenFindBySiteUrlthenReturnSite() {
         Site site = this.siteService.findBySiteUrl("site_1");
@@ -58,6 +71,9 @@ class SiteServiceImplTest {
         assertEquals(site.getStatus(), Status.ACTIVE);
     }
 
+    /**
+     * Find site by url and password.
+     */
     @Test
     void whenFindBySiteUrlAndPasswordthenReturnSite() {
         Site site = this.siteService
@@ -66,6 +82,9 @@ class SiteServiceImplTest {
         assertNotNull(site);
     }
 
+    /**
+     * Find site by id.
+     */
     @Test
     void whenFindByIdThenReturnSite() {
         Site site = this.siteService.findById(11L);
@@ -73,6 +92,9 @@ class SiteServiceImplTest {
         assertEquals(site.getSite(), "site_1");
     }
 
+    /**
+     * Delete site.
+     */
     @Test
     void whenDeleteSiteThenChangeSiteStaus() {
         Site site = this.siteService.findById(11L);
